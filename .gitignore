@@ -1,0 +1,31 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+
+# Python dependencies
+__pycache__/
+*.py[cod]
+*.pyo
+
+# macOS files
+.DS_Store
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# IDE settings
+.vscode/
+.idea/
+
+# Build files
+dist/
+build/
+bin/
+obj/
+
+# Temporary files
+*.tmp
+*.swp
