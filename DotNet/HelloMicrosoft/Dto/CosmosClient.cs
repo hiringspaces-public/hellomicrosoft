@@ -10,7 +10,7 @@ public class CosmosClient : ICosmosClient
         return Task.FromResult(doc);
     }
 
-    public Task UpsertAsync(CounterDocument document)
+    public Task UpsertAsync(CounterDocument document, string? matchETag)
     {
         var key = $"{document.partitionKey}:{document.id}";
         _store[key] = document;
