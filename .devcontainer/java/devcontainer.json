@@ -1,15 +1,13 @@
 {
-  "name": "AI Skills Lab - Java",
-  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "name": "AI Skills Lab - .NET 8",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
 
   "customizations": {
     "vscode": {
       "extensions": [
-        "vscjava.vscode-java-pack",
-        "vscjava.vscode-java-debug",
-        "vscjava.vscode-java-test",
-        "vscjava.vscode-maven",
-        "vscjava.vscode-gradle",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
 
         "GitHub.copilot",
         "GitHub.copilot-chat",
@@ -21,19 +19,23 @@
         "remote.extensionKind": {
           "pomdtr.excalidraw-editor": ["ui"]
         },
+        "dotnet.server.useOmnisharp": false,
+        "dotnet.defaultSolution": "HelloMicrosoft.sln",
         "editor.formatOnSave": true,
-        "java.configuration.updateBuildConfiguration": "automatic"
+        "[csharp]": {
+          "editor.defaultFormatter": "ms-dotnettools.csharp"
+        }
       }
     }
   },
 
-  "forwardPorts": [8080],
+  "forwardPorts": [5000, 5001],
   "portsAttributes": {
-    "8080": { "label": "App — HTTP", "onAutoForward": "notify" }
+    "5000": { "label": "API — HTTP", "onAutoForward": "notify" },
+    "5001": { "label": "API — HTTPS", "onAutoForward": "notify" }
   },
 
-  "onCreateCommand": "code --install-extension vscjava.vscode-java-pack --install-extension vscjava.vscode-java-debug --install-extension vscjava.vscode-java-test --install-extension vscjava.vscode-maven --install-extension vscjava.vscode-gradle --install-extension GitHub.copilot --install-extension GitHub.copilot-chat --install-extension ms-azuretools.vscode-docker",
-  "postCreateCommand": "java -version",
+  "postCreateCommand": "dotnet restore && dotnet build && (dotnet test &)",
 
   "remoteUser": "vscode"
 }

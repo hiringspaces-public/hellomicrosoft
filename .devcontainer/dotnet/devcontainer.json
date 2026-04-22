@@ -41,8 +41,6 @@
       "onAutoForward": "notify"
     }
   },
-  "onCreateCommand": "code --install-extension ms-dotnettools.vscode-dotnet-runtime --install-extension ms-dotnettools.csharp --install-extension ms-dotnettools.csdevkit --install-extension GitHub.copilot --install-extension GitHub.copilot-chat --install-extension ms-azuretools.vscode-docker",
-  "postCreateCommand": "dotnet restore && dotnet build",
-  "postAttachCommand": "dotnet test",
+  "postCreateCommand": "dotnet restore && dotnet build && (dotnet test &)",
   "remoteUser": "vscode"
 }
