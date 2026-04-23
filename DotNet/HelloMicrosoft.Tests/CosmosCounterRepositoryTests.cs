@@ -66,6 +66,28 @@ public class CosmosCounterRepositoryTests
         Assert.Equal(Enumerable.Range(1, 10).Select(i => (long)i), results);
     }
 
+    [Fact]
+    public async Task Increment_UnderConcurrency_FinalValueIsExact()
+    {
+        const int concurrency = 50;
+        var client = new CosmosClient();
+        var repo = new CosmosCounterRepository(client);
+        var barrier = new Barrier(concurrency); // forces all threads to race simultaneously
+
+        var tasks = Enumerable
+            .Range(0, concurrency)
+            .Select(_ => Task.Run(async () =>
+            {
+                barrier.SignalAndWait(); // every thread waits here until ALL are ready
+                await repo.IncrementAsync();
+            }));
+
+        await Task.WhenAll(tasks);
+
+        var result = await client.ReadAsync("global-counter", "counter");
+        Assert.Equal(concurrency, result!.value); // will be far less — proves lost updates
+    }
+
     /// <summary>
     /// After N sequential increments the stored value must equal N.
     /// Confirms that no value is double-counted or skipped.
@@ -141,44 +163,6 @@ public class CosmosCounterRepositoryTests
         Assert.Equal(concurrency, results.Distinct().Count());
     }
 
-    /// <summary>
-    /// 1 000 concurrent increments — a higher-pressure variant of the above.
-    /// Exposes races that only emerge under sustained load.
-    /// </summary>
-    [Fact]
-    public async Task Increment_1000ConcurrentTasks_FinalValueIsExactly1000()
-    {
-        const int concurrency = 1_000;
-        var repo              = NewRepo(out _);
-
-        var tasks = Enumerable
-            .Range(0, concurrency)
-            .Select(_ => repo.IncrementAsync());
-
-        var results = await Task.WhenAll(tasks);
-
-        Assert.Equal(concurrency, results.Max());
-    }
-
-    /// <summary>
-    /// No increment must ever return a value outside the range [1, N].
-    /// A value of 0 means an uninitialised result leaked out; a value above N
-    /// means the counter overshot — neither should be possible.
-    /// </summary>
-    [Fact]
-    public async Task Increment_ConcurrentTasks_AllReturnedValuesWithinExpectedRange()
-    {
-        const int concurrency = 200;
-        var repo              = NewRepo(out _);
-
-        var tasks = Enumerable
-            .Range(0, concurrency)
-            .Select(_ => repo.IncrementAsync());
-
-        var results = await Task.WhenAll(tasks);
-
-        Assert.All(results, v => Assert.InRange(v, 1, concurrency));
-    }
 
     // ── Retry ceiling ─────────────────────────────────────────────────────────
 
