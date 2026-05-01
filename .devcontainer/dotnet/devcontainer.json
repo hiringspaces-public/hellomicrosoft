@@ -1,27 +1,33 @@
 {
-  "name": "HelloMicrosoft - Java",
-  "image": "mcr.microsoft.com/devcontainers/java:dev-21-jdk-bookworm",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/Java",
+  "name": "HelloMicrosoft - DOTNET",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/DotNet",
   "customizations": {
     "vscode": {
       "extensions": [
-        "vscjava.vscode-java-pack",
-        "vscjava.vscode-gradle",
+        "ms-dotnettools.csdevkit",
         "ms-azuretools.vscode-docker",
         "pomdtr.excalidraw-editor"
       ],
       "settings": {
         "remote.extensionKind": {
-          "pomdtr.excalidraw-editor": [
-            "ui"
-          ]
+          "pomdtr.excalidraw-editor": ["ui"]
         },
+        "dotnet.server.useOmnisharp": false,
+        "dotnet.defaultSolution": "HelloMicrosoft.sln",
         "editor.formatOnSave": true,
-        "java.configuration.updateBuildConfiguration": "automatic"
+        "[csharp]": {
+          "editor.defaultFormatter": "ms-dotnettools.csharp"
+        }
       }
     }
   },
-  "onCreateCommand": "sudo apt-get install -y maven && mvn dependency:go-offline -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
-  "postCreateCommand": "mvn test -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
+  "forwardPorts": [5000, 5001],
+  "portsAttributes": {
+    "5000": { "label": "API — HTTP", "onAutoForward": "notify" },
+    "5001": { "label": "API — HTTPS", "onAutoForward": "notify" }
+  },
+  "postCreateCommand": "dotnet restore && dotnet build",
+  "postAttachCommand": "dotnet test",
   "remoteUser": "vscode"
 }
