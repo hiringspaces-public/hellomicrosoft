@@ -1,6 +1,7 @@
 {
   "name": "HelloMicrosoft - DOTNET",
   "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/DotNet",
   "customizations": {
     "vscode": {
       "extensions": [
