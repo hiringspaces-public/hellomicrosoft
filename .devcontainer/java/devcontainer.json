@@ -1,9 +1,7 @@
 {
   "name": "HelloMicrosoft - Java",
-  "image": "mcr.microsoft.com/devcontainers/java:21-maven",
-
+  "image": "mcr.microsoft.com/devcontainers/java:dev-21-jdk-bookworm",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/Java",
-
   "customizations": {
     "vscode": {
       "extensions": [
@@ -14,15 +12,16 @@
       ],
       "settings": {
         "remote.extensionKind": {
-          "pomdtr.excalidraw-editor": ["ui"]
+          "pomdtr.excalidraw-editor": [
+            "ui"
+          ]
         },
         "editor.formatOnSave": true,
         "java.configuration.updateBuildConfiguration": "automatic"
       }
     }
   },
-
-  "postCreateCommand": "mvn dependency:go-offline -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
-
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y maven && mvn dependency:go-offline -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
+  "postCreateCommand": "mvn test -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
   "remoteUser": "vscode"
 }
