@@ -11,6 +11,8 @@
         <relativePath/>
     </parent>
 
+    <!-- Ties this module back to the Java-level aggregator -->
+
     <groupId>com.hellomicrosoft</groupId>
     <artifactId>HelloMicrosoft</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -33,6 +35,14 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.5.0</version>
         </dependency>
+
+        <!-- JUnit 5 (available to any ad-hoc test run inside this module) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -40,6 +50,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <configuration>
+                            <!-- Puts the fat runnable JAR under the 'exec' classifier,
+                                 leaving the plain JAR available as a regular dependency
+                                 for HelloMicrosoft.Tests -->
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
             </plugin>
         </plugins>
     </build>

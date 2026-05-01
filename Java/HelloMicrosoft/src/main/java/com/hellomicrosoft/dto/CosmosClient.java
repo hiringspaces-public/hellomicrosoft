@@ -4,12 +4,12 @@ import com.hellomicrosoft.interfaces.ICosmosClient;
 import com.hellomicrosoft.models.CounterDocument;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class CosmosClient implements ICosmosClient {
 
-    private final HashMap<String, CounterDocument> store = new HashMap<>();
+    private final ConcurrentHashMap<String, CounterDocument> store = new ConcurrentHashMap<>();
 
     @Override
     public CounterDocument read(String id, String partitionKey) {

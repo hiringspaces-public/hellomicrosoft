@@ -1,0 +1,6 @@
+@HelloMicrosoft_HostAddress = http://localhost:8080
+
+GET {{HelloMicrosoft_HostAddress}}/hello
+Accept: application/json
+
+###

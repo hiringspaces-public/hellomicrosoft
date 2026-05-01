@@ -18,4 +18,13 @@ public class CounterDocument {
 
     public String getETag() { return eTag; }
     public void setETag(String eTag) { this.eTag = eTag; }
+
+    public CounterDocument copy() {
+        CounterDocument c = new CounterDocument();
+        c.setId(this.id);
+        c.setPartitionKey(this.partitionKey);
+        c.setValue(this.value);
+        c.setETag(this.eTag);
+        return c;
+    }
 }
