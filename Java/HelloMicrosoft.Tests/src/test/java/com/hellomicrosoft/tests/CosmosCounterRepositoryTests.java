@@ -14,11 +14,13 @@
 // =============================================================================
 
 package com.hellomicrosoft.tests;
+import com.hellomicrosoft.dao.CosmosClient;
+import com.hellomicrosoft.dao.CosmosCounterRepository;
 import com.hellomicrosoft.interfaces.ICosmosClient;
 import com.hellomicrosoft.models.CounterDocument;
-import com.hellomicrosoft.dto.CosmosCounterRepository;
+
 import org.junit.jupiter.api.Test;
-import com.hellomicrosoft.dto.CosmosClient;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BrokenBarrierException;

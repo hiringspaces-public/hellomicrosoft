@@ -1,4 +1,4 @@
-package com.hellomicrosoft.dto;
+package com.hellomicrosoft.dao;
 
 import com.hellomicrosoft.interfaces.ICosmosClient;
 import com.hellomicrosoft.interfaces.ICounterRepository;

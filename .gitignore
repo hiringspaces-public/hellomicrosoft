@@ -26,6 +26,23 @@ build/
 bin/
 obj/
 
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+mvnw
+mvnw.cmd
+
+# IntelliJ IDEA
+*.iml
+*.iws
+*.ipr
+.idea/
+
 # Temporary files
 *.tmp
 *.swp
+*.class

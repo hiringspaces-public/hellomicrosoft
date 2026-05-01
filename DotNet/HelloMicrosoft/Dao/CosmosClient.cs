@@ -5,7 +5,8 @@ public class CosmosClient : ICosmosClient
 
     public async Task<CounterDocument?> ReadAsync(string id, string partitionKey)
     {
-        await Task.Delay(10);  // simulate network latency
+        int rand = new Random().Next(1, 100);
+        await Task.Delay(rand);  // simulate network latency
         var key = $"{partitionKey}:{id}";
         _store.TryGetValue(key, out var doc);
         return doc;
@@ -13,7 +14,8 @@ public class CosmosClient : ICosmosClient
 
     public async Task UpsertAsync(CounterDocument document, string? matchETag)
     {
-        await Task.Delay(10);  // simulate network latency
+        int rand = new Random().Next(1, 100);
+        await Task.Delay(rand);  // simulate network latency
         var key = $"{document.partitionKey}:{document.id}";
         _store[key] = document;
         return;
