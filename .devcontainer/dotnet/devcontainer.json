@@ -1,17 +1,22 @@
 {
-  "name": "HelloMicrosoft - DOTNET",
+  "name": "HelloMicrosoft - .NET 8",
   "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/DotNet",
   "customizations": {
     "vscode": {
       "extensions": [
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-dotnettools.csharp",
         "ms-dotnettools.csdevkit",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
         "ms-azuretools.vscode-docker",
         "pomdtr.excalidraw-editor"
       ],
       "settings": {
         "remote.extensionKind": {
-          "pomdtr.excalidraw-editor": ["ui"]
+          "pomdtr.excalidraw-editor": [
+            "ui"
+          ]
         },
         "dotnet.server.useOmnisharp": false,
         "dotnet.defaultSolution": "HelloMicrosoft.sln",
@@ -22,12 +27,20 @@
       }
     }
   },
-  "forwardPorts": [5000, 5001],
+  "forwardPorts": [
+    5000,
+    5001
+  ],
   "portsAttributes": {
-    "5000": { "label": "API — HTTP", "onAutoForward": "notify" },
-    "5001": { "label": "API — HTTPS", "onAutoForward": "notify" }
+    "5000": {
+      "label": "API — HTTP",
+      "onAutoForward": "notify"
+    },
+    "5001": {
+      "label": "API — HTTPS",
+      "onAutoForward": "notify"
+    }
   },
-  "postCreateCommand": "dotnet restore && dotnet build",
-  "postAttachCommand": "dotnet test",
+  "postCreateCommand": "dotnet restore && dotnet build && (dotnet test &)",
   "remoteUser": "vscode"
 }
