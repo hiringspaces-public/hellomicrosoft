@@ -1,10 +1,6 @@
 {
   "name": "HelloMicrosoft - Java",
-  "image": "mcr.microsoft.com/devcontainers/java:17",
-
-  "features": {
-    "ghcr.io/devcontainers/features/maven:1": {}
-  },
+  "image": "mcr.microsoft.com/devcontainers/java:21-maven",
 
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/Java",
 
@@ -26,8 +22,7 @@
     }
   },
 
-  "postCreateCommand": "mvn install -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
-  "postAttachCommand": "mvn test -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
+  "postCreateCommand": "mvn dependency:go-offline -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
 
   "remoteUser": "vscode"
 }
