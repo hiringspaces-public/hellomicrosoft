@@ -1,5 +1,5 @@
 {
-  "name": "AI Skills Lab - .NET 8",
+  "name": "HelloMicrosoft - DOTNET",
   "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
   "customizations": {
     "vscode": {

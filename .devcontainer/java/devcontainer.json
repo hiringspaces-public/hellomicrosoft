@@ -1,6 +1,7 @@
 {
-  "name": "AI Skills Lab - Java",
-  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "name": "HelloMicrosoft - Java",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/Java",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -22,5 +23,7 @@
   "portsAttributes": {
     "8080": { "label": "App — HTTP", "onAutoForward": "notify" }
   },
+  "postCreateCommand": "mvn install -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
+  "postAttachCommand": "mvn test -f /workspaces/${localWorkspaceFolderBasename}/Java/pom.xml",
   "remoteUser": "vscode"
 }
