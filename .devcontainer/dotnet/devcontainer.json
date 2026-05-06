@@ -25,10 +25,12 @@
           "Java": true
         },
         "files.watcherExclude": {
-          "**/Java/**": true
+          "**/Java/**": true,
+          "**/.devcontainer/**": true
         },
         "git.showActionButton": { "commit": true, "publish": false, "sync": false },
-        "scm.graph.badges": "off"
+        "scm.graph.badges": "off",
+        "scm.showHistoryGraph": false      
       }
     }
   },

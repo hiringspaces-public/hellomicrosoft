@@ -30,10 +30,13 @@
           "HelloMicrosoft.sln": true
         },
         "files.watcherExclude": {
-          "**/DotNet/**": true
+          "**/DotNet/**": true,
+          "**/.devcontainer/**": true
+
         },
         "git.showActionButton": { "commit": true, "publish": false, "sync": false },
-        "scm.graph.badges": "off"
+        "scm.graph.badges": "off",
+        "scm.showHistoryGraph": false
       }
     }
   },
