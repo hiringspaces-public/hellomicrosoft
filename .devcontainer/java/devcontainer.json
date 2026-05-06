@@ -2,22 +2,38 @@
   "name": "HelloMicrosoft - Java",
   "image": "mcr.microsoft.com/devcontainers/java:dev-21-jdk-bookworm",
 
-  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/Java",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
   "customizations": {
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack",
         "vscjava.vscode-gradle",
-        "ms-azuretools.vscode-docker",
-        "pomdtr.excalidraw-editor"
+        "hediet.vscode-drawio"
       ],
       "settings": {
-        "remote.extensionKind": {
-          "pomdtr.excalidraw-editor": ["ui"]
-        },
         "editor.formatOnSave": true,
-        "java.configuration.updateBuildConfiguration": "automatic"
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.import.exclusions": [
+          "**/node_modules/**",
+          "**/.metadata/**",
+          "**/archetype-resources/**",
+          "**/META-INF/maven/**",
+          "DotNet/**"
+        ],
+        "files.exclude": {
+          "DotNet": true,
+          "HelloMicrosoft.sln": true
+        },
+        "search.exclude": {
+          "DotNet": true,
+          "HelloMicrosoft.sln": true
+        },
+        "files.watcherExclude": {
+          "**/DotNet/**": true
+        },
+        "git.showActionButton": { "commit": true, "publish": false, "sync": false },
+        "scm.graph.badges": "off"
       }
     }
   },
