@@ -19,10 +19,12 @@
           "editor.defaultFormatter": "ms-dotnettools.csharp"
         },
         "files.exclude": {
-          "Java": true
+          "Java": true,
+          "**/.devcontainer": true
         },
         "search.exclude": {
-          "Java": true
+          "Java": true,
+          "**/.devcontainer/**": true
         },
         "files.watcherExclude": {
           "**/Java/**": true,

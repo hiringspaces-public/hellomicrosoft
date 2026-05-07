@@ -23,11 +23,13 @@
         ],
         "files.exclude": {
           "DotNet": true,
-          "HelloMicrosoft.sln": true
+          "HelloMicrosoft.sln": true,
+          "**/.devcontainer": true
         },
         "search.exclude": {
           "DotNet": true,
-          "HelloMicrosoft.sln": true
+          "HelloMicrosoft.sln": true,
+          "**/.devcontainer": true
         },
         "files.watcherExclude": {
           "**/DotNet/**": true,
